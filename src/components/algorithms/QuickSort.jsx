@@ -1,7 +1,6 @@
 import React from 'react'
 import {swap} from '../utility/swap.js';
 import {SWAP} from '../utility/constants.js';
-import { preview } from 'vite';
 
 export const QuickSort = async(array,length) => 
 {

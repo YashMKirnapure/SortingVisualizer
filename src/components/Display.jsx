@@ -1,10 +1,9 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
-import BubbleSort from './algorithms/BubbleSort.jsx';
 import InsertionSort from './algorithms/InsertionSort.jsx';
 import SelectionSort from './algorithms/SelectionSort.jsx';
-import MergeSort from './algorithms/MergeSort.jsx';
-import QuickSort from './algorithms/QuickSort.jsx';
+import {QuickSort} from './algorithms/QuickSort.jsx';
+import  {MergeSort}  from './algorithms/MergeSort.jsx';
 import { SWAP } from './utility/constants.js';
 
 const Display = ({algorithm,arraySize,speed}) => 
@@ -21,7 +20,7 @@ const Display = ({algorithm,arraySize,speed}) =>
     {
         let moves;
         if(algorithm === 'Bubble Sort')
-          moves = await BubbleSort(array,array.length);
+          moves = await QuickSort(array,array.length);
         else if(algorithm === 'Insertion Sort')
           moves = await InsertionSort(array,array.length);
         else if(algorithm === 'Selection Sort')
@@ -57,7 +56,7 @@ const Display = ({algorithm,arraySize,speed}) =>
   return (
     <>
     <div className='flex justify-center text-center items-center'>
-        <div className='w-[480px] h-[580px] border border-slate-400 rounded-lg mt-10 shadow-sm shadow-slate-900'>
+        <div className='w-[480px] h-[580px] border border-slate-400 rounded-lg mt-10 shadow-sm shadow-slate-900 overflow-hidden'>
           {array.map((value,index)=>(
             <div key = {index} 
             style={{
@@ -65,7 +64,7 @@ const Display = ({algorithm,arraySize,speed}) =>
               width:`${100/arraySize}%`,
               backgroundColor:'blue',
               display: 'inline-block',
-              margin: '0 1px',
+              boxSizing: 'border-box',
             }}
             />
           ))}
@@ -76,4 +75,4 @@ const Display = ({algorithm,arraySize,speed}) =>
   )
 }
 
-export default Display
+export default Display;

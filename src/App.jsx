@@ -1,7 +1,7 @@
 import React from 'react'
-import Home from './components/Home'
-import Footer from './components/Footer'
-import Display from './components/Display'
+import Home from './components/Home.jsx'
+import Footer from './components/Footer.jsx'
+import Display from './components/Display.jsx'
 
 const App = () => 
 {

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
-import Display from "./Display";
+import Display from "./Display.jsx";
 
-const Home = () => {
+const Home = () => 
+{
   const [openDropdown, setOpenDropdown] = useState(null);
   const [algorithm, setAlgorithm] = useState("Bubble Sort");
   const [arraySize, setArraySize] = useState(50);
@@ -155,7 +156,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Passing the algo,size and speed to Dispay */}
+      {/* Passing the algo,size and speed to Display */}
       <Display algorithm={algorithm} arraySize={arraySize} speed={speed}/>
     </>
   );
