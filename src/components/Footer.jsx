@@ -4,9 +4,10 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
 import { FaDiscord } from "react-icons/fa";
 
-const Footer = () => {
+const Footer = () => 
+{
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center mt-40">
       <p className="text-xl font-medium border-t-2 border-slate-700 px-2 py-1 outline-none text-teal-500">Created by Yash Kirnapure</p>
       <div className="flex space-x-2 cursor-pointer mt-1">
         <a href="https://github.com/YashMKirnapure" target="_blank" >

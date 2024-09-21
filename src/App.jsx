@@ -1,7 +1,6 @@
 import React from 'react'
 import Home from './components/Home.jsx'
 import Footer from './components/Footer.jsx'
-import Display from './components/Display.jsx'
 
 const App = () => 
 {
@@ -9,7 +8,6 @@ const App = () =>
     <>
     <div>
       <Home/>   
-      <Display/>  
       <Footer/> 
     </div>
     </>

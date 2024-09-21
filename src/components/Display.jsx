@@ -35,42 +35,45 @@ const Display = ({algorithm,arraySize,speed}) =>
       sortArray();
   },[algorithm,speed]);  
 
-  const animateSorting = (moves) =>
-  {
-    if(!moves)
-      return;
-    moves.forEach(([i,j,action],index)=>{
-      setTimeout(() => {
-        setArray((prevArray)=>{
-          const newArray = [...prevArray];
-          if(action === SWAP)
-          {
-            [newArray[i],newArray[j]] = [newArray[j],newArray[i]];
-          }
-          return newArray;
+  const animateSorting = (moves) => {
+    if (!moves) return;
+  
+    moves.forEach(([i, j, action], index) => {
+      // Instead of using setTimeout for every single move, you can group moves
+      // and update them less frequently
+      if (index % Math.floor(1000 / speed) === 0) {
+        requestAnimationFrame(() => {
+          setArray((prevArray) => {
+            const newArray = [...prevArray];
+            if (action === SWAP) {
+              [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+          });
         });
-      },index * (1000/speed));
+      }
     });
   };
 
   return (
     <>
     <div className='flex justify-center text-center items-center'>
-        <div className='w-[480px] h-[580px] border border-slate-400 rounded-lg mt-10 shadow-sm shadow-slate-900 overflow-hidden'>
+        <div className='w-[780px] h-[580px] border border-slate-400 rounded-lg mt-10 shadow-sm shadow-slate-900 overflow-hidden'>
           {array.map((value,index)=>(
-            <div key = {index} 
+            <div 
+            key = {index} 
             style={{
               height:`${value}%`,
               width:`${100/arraySize}%`,
-              backgroundColor:'blue',
+              backgroundColor:'#6B5B95',
               display: 'inline-block',
               boxSizing: 'border-box',
+              border: '1px solid white',
             }}
             />
           ))}
         </div>      
     </div>
-    <br/>
     </>
   )
 }
