@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Display from "./Display.jsx";
 
-const Home = () => {
+const Home = () => 
+{
   const [openDropdown, setOpenDropdown] = useState(null);
   const [algorithm, setAlgorithm] = useState(null);
   const [arraySize, setArraySize] = useState(null);
-  const [speed, setSpeed] = useState();
+  const [speed, setSpeed] = useState(null);
   const [generate, setGenerate] = useState(false);
   const [sort, setSort] = useState(false);
 
@@ -35,7 +36,11 @@ const Home = () => {
   };
 
   const handleSort = () => {
-    setSort(true);
+    if (algorithm && arraySize && speed) {
+      setSort(true);
+    } else {
+      alert("Please select the options first");
+    }
   };
 
   return (
@@ -143,7 +148,7 @@ const Home = () => {
           <div className="relative inline-block">
             <button onClick={() => toggleDropdown("dropdown3")}>
               <div className="border-2 px-2 py-2 border-slate-700 rounded-md bg-orange-300 outline-none flex">
-                Speed: {speed}x
+                Speed: {speed || "Select"}x
                 <IoMdArrowDropdown className="ml-1 mt-1" />
               </div>
             </button>
@@ -151,13 +156,13 @@ const Home = () => {
             {openDropdown === "dropdown3" && (
               <div className="absolute z-10 mt-1 border-2 px-2 py-1 rounded-md bg-orange-300 outline-none w-full text-base">
                 <ul className="py-1">
-                  {[1.0,2.0,3.0,4.0,5.0,6.0].map((speedOption)=>(
-                    <li 
-                    key={speedOption}
-                    className="border-b-2 border-slate-700 hover:bg-amber-600"
-                    onClick={() => handleSpeedChange(1.0)}
+                  {[1.0, 2.0, 3.0, 4.0, 5.0, 6.0].map((speedOption) => (
+                    <li
+                      key={speedOption}
+                      className="border-b-2 border-slate-700 hover:bg-amber-600"
+                      onClick={() => handleSpeedChange(speedOption)}
                     >
-                    <a href="#">{speedOption}x</a>
+                      <a href="#">{speedOption}x</a>
                     </li>
                   ))}
                 </ul>
@@ -175,7 +180,14 @@ const Home = () => {
       </div>
 
       {/* Passing the algo,size and speed to Display */}
-      <Display algorithm={algorithm} arraySize={arraySize} speed={speed} />
+      {generate && (
+        <Display 
+        algorithm={algorithm} 
+        arraySize={arraySize} 
+        speed={speed} 
+        sort={sort}
+        />
+      )}
     </>
   );
 };

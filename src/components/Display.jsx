@@ -2,8 +2,9 @@ import React from 'react'
 import { useState,useEffect } from 'react'
 import InsertionSort from './algorithms/InsertionSort.jsx';
 import SelectionSort from './algorithms/SelectionSort.jsx';
+import BubbleSort from './algorithms/BubbleSort.jsx';
 import {QuickSort} from './algorithms/QuickSort.jsx';
-import  {MergeSort}  from './algorithms/MergeSort.jsx';
+import {MergeSort}  from './algorithms/MergeSort.jsx';
 import { SWAP } from './utility/constants.js';
 
 const Display = ({algorithm,arraySize,speed}) => 
@@ -19,39 +20,46 @@ const Display = ({algorithm,arraySize,speed}) =>
     const sortArray = async() =>
     {
         let moves;
-        if(algorithm === 'Bubble Sort')
-          moves = await QuickSort(array,array.length);
-        else if(algorithm === 'Insertion Sort')
-          moves = await InsertionSort(array,array.length);
-        else if(algorithm === 'Selection Sort')
-          moves = await SelectionSort(array,array.length);
-        else if(algorithm === 'Merge Sort')
-          moves = await MergeSort(array,array.length);
-        else
-          moves = await QuickSort(array,array.length);
+        switch(algorithm)
+        {
+          case 'Bubble Sort':
+            moves = await BubbleSort(array,array.length);
+            break;
+          case 'Insertion Sort':
+            moves = await InsertionSort(array,array.length);
+            break;
+          case 'Selection Sort':
+            moves = await SelectionSort(array,array.length);
+            break;
+          case 'Merge Sort':
+            moves = await MergeSort(array,array.length);
+            break;
+          case 'Quick Sort':
+            moves = await QuickSort(array,array.length);
+            break;
+          default:
+            return;
+          }
         animateSorting(moves);
     };
+
     if(algorithm)
       sortArray();
-  },[algorithm,speed]);  
+  },[algorithm,array,speed]);  
 
   const animateSorting = (moves) => {
     if (!moves) return;
   
     moves.forEach(([i, j, action], index) => {
-      // Instead of using setTimeout for every single move, you can group moves
-      // and update them less frequently
-      if (index % Math.floor(1000 / speed) === 0) {
-        requestAnimationFrame(() => {
-          setArray((prevArray) => {
-            const newArray = [...prevArray];
-            if (action === SWAP) {
-              [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-            }
-            return newArray;
-          });
+      setTimeout(() => {
+        setArray((prevArray) => {
+          const newArray = [...prevArray];
+          if (action === SWAP) {
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+          }
+          return newArray;
         });
-      }
+      }, index * (1000 / speed));
     });
   };
 
